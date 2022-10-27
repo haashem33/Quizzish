@@ -1,0 +1,191 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quizzish</title>
+    <link rel="Sida icon"
+          href="~/bilder/Sidicon.png"
+          type="image/x-icon" />
+
+    <link rel="stylesheet"
+          href="~/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=PT Sans"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=K2D" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto"
+          rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="minanimation">
+        <div></div>
+    </div>
+    <wrapper class="minnya">
+        <div class="hem">
+            <header class="naven">
+                <div class="lome">
+                    <a asp-action="index" asp-controller="Home">
+                        <img class="sidlogga"
+                             src="~/bilder/logo.png"
+                             alt="sidlogo" />
+                    </a>
+                    <button id="mobil-meny"
+                            class="mobil-meny"
+                            aria-controls="navbara"
+                            aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+                <nav>
+                    <ul id="prinav" data-visible="false" class="navbara">
+                        @if (User.Identity.IsAuthenticated) {
+                            <li>
+                                <a asp-action="SignOutUser" asp-controller="Home">
+                                    <span class="navicon">
+                                        <img src="~/bilder/loggauticon.png" />
+                                    </span>Logga Ut
+                                </a>
+                                <form style="text-decoration:none !important;" asp-action="SignOutUser" asp-controller="Home">
+                                    <button class="button-17 l" role="button">Logga ut</button>
+                                </form>
+                            </li>
+                            <li>
+                                <a asp-action="quiz" asp-controller="Home">
+                                    <span class="navicon">
+                                        <img src="~/bilder/iconquiz.png" />
+                                    </span>Ta en quiz
+                                </a>
+                                <form style="text-decoration:none !important;" asp-action="quiz" asp-controller="Home" method="get">
+                                    <button class="button-17 l" role="button">Ta en quiz</button>
+                                    
+                                </form>
+                                
+                            </li>
+                        }
+                        else{
+                            <li>
+                                <a asp-action="Login" asp-controller="Home">
+                                    <span class="navicon">
+                                        <img src="~/bilder/loggain.png" />
+                                    </span>
+                                    Logga in
+                                </a>
+                                <div>
+                                    <form style="text-decoration:none !important;" asp-action="Login" asp-controller="Home" method="get">
+                                        <button class="button-17 l" role="button">Logga in</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <a asp-action="registrera" asp-controller="Home">
+                                    <span class="navicon">
+                                        <img src="~/bilder/registrera.png" />
+                                    </span>Registrera
+                                </a>
+                                <div>
+                                    <form style="text-decoration:none !important;" asp-action="registrera" asp-controller="Home" method="get">
+                                        <button class="button-17 l" role="button">Registrera</button>
+                                    </form>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </header>
+            <div class="textstor">
+                <h1 class="s">
+                    <span class="is"><strong>Testa & Utöka</strong> </span>dina <br />
+                    kunskaper om världen
+                </h1>
+            </div>
+            <div class="text">
+                @if (User.Identity.IsAuthenticated){
+                    <form style="text-decoration:none !important;" asp-action="quiz" asp-controller="Home" method="get">
+                        <button class="k" role="button">Ta en Quiz</button>
+                    </form>
+                }
+                else{
+                    <form style="text-decoration:none !important;" asp-action="registrera" asp-controller="Home">
+                        <button class="k" role="button">KOM IGÅNG</button>
+                    </form>
+                }
+                <div class="v">
+                    <img class="item1"
+                         src="~/bilder/ab.jpg"
+                         alt="" />
+                    <img class="item2"
+                         src="~/bilder/ad.jpg"
+                         alt="" />
+                    <img class="item3"
+                         src="~/bilder/af.png"
+                         alt="" />
+                    <img class="item4"
+                         src="~/bilder/as.png"
+                         alt="" />
+                    <img class="item5"
+                         src="~/bilder/av.png"
+                         alt="" />
+                    <img class="item6"
+                         src="~/bilder/ar.jpg"
+                         alt="" />
+                    <p class="item7">& 45000+ personer har kommit igång</p>
+                </div>
+            </div>
+        </div>
+        <main class="cardcontainer">
+            <section class="card-row">
+                <article class="card pit fade">
+                    <h3>Testa dina kunskaper med tusentals quiz</h3>
+                </article>
+                <article class="card pi pia fade">
+                    <img src="~/bilder/1.jpg"
+                         alt="exposed brick wall in a hipster cafe" />
+                </article>
+
+                <article class="card pit fade">
+                    <h3>Välj en quiz som passar just din nivå</h3>
+                </article>
+                <article class="card pi pie fade">
+                    <img src="~/bilder/2.jpg"
+                         alt="exposed brick wall in a hipster cafe" />
+                </article>
+            </section>
+        </main>
+        <footer>
+            <div class="footer">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h1>Facebook</h1>
+                        <h1>Instagram</h1>
+                        <h1>Twitter</h1>
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="~/bilder/logo.png"
+                             alt="logo" />
+                    </div>
+                    <div class="col-sm-4">
+                        <h1>Kontakta oss</h1>
+                        <h1>Mobil: 0520-2893</h1>
+                        <h1>E-post: Quizzish@quiz.se</h1>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </wrapper>
+
+    <script src="~/js/minjava.js"></script>
+</body>
+</html>

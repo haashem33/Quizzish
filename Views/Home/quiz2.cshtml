@@ -1,0 +1,206 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+@model List<fragor>
+@if(ViewBag.Country -1 < 4){
+<form class="svarformen" method="post" asp-action="quiz2" asp-controller="Home">
+    <h1 class="faf">@ViewBag.fragan</h1>
+        <div class="wrapper yu">
+
+        <div>
+            <h3 >
+                    Du har <span class="frsk"></span>  fråga kvar av 5 -|- Du har <span style="color: lightgreen" class="ratts"></span> rätta svar &amp; <span style="color: orangered" class="fela"></span> felaktiga svar
+            </h3> <h3 class="vsvar"></h3>
+        </div>
+        
+            @foreach (var nummer in ViewBag.arra)
+            {
+               
+            <input value="@nummer" type="radio" name="select" id="option-@nummer">
+            <label for="option-@nummer" class="option option-@nummer">
+                <span class="dot"></span>
+                <span class="op-@nummer">@ViewBag.svarray[nummer-1]</span>
+            </label>
+            }
+
+        @{
+            
+                var cars = Model.ToList();
+                for (var i = 0; i < cars.Count; i++)
+                {
+
+                                <input type="hidden" asp-for="@Model[i].Id" value="@i" />
+                                <input type="hidden" asp-for="@Model[i].svarid" value="@cars[i].svarid" />
+                                <input type="hidden" asp-for="@Model[i].fraga" value="@cars[i].fraga" />
+                                <input type="hidden" asp-for="@Model[i].svarkat" value="@cars[i].svarkat" />
+                                <input type="hidden" asp-for="@Model[i].kat" value="@cars[i].kat" />
+
+                }
+                            <input type="hidden" class="hr" name="ratt" value="" />
+                            <input type="hidden" class="hf" name="fel" value="" />
+                            @Html.Hidden("Country", (object)ViewBag.Country)
+                            @Html.Hidden("sports", (object)ViewBag.sports)
+                            @Html.Hidden("geo", (object)ViewBag.geo)
+
+            
+                                  
+        }
+     
+
+            
+            <div class="navigation">
+            <button type="submit" class="na kol">Checka</button>
+
+            <button type="submit" name="nasta" value="select" id="test" class="na next">
+                    Nästa
+            </button>
+            </div>
+        </div>
+            </form>
+
+<script>
+    $(".ratts").html(@ViewBag.ratta);
+    $(".fela").html(@ViewBag.fela)
+    $(".hf").val(@ViewBag.fela);
+    $(".hr").val(@ViewBag.ratta);
+    
+    $(".kol").prop('disabled', true)
+    $(".kol").css("cursor", "default");
+    $(".frsk").html(5 - @ViewBag.Country)
+
+    $(".next").click(function () {
+        if ($(".option").hasClass("fel")){
+            console.log("den har")
+            event.preventDefault();
+            $.ajax({
+                url: "/Home/quiz2",
+                type: "POST",
+                data: $("form").serialize(),
+                success: function (result) {
+                    $(".frogor").html(result)
+
+                }, error: function (ajaxContext) {
+                    alert(ajaxContext.responseText)
+                }
+            });
+        }
+        else{
+            event.preventDefault();
+            $('.vsvar').html("Svara & Kontrollera denna frågan först !!");
+            $('.vsvar').css("color", "red");
+        }
+ ;
+});
+
+    $("input[name='select']").change(function () {
+        event.preventDefault();
+        $('.vsvar').empty();
+        $(".kol").prop('disabled', false)
+        $(".kol").css("cursor", "pointer");
+    });
+
+$(".kol").click(function () {
+event.preventDefault();
+$.ajax({
+url: "/Home/checka",
+type: "POST",
+data: $("form").serialize(),
+success: function (result) {
+
+        if (result) {
+                    
+        $(".option-4").addClass("ratt");
+        $(".option-1").addClass("fel");
+        $(".option-2").addClass("fel");
+        $(".option-3").addClass("fel");
+        $('#option-3').prop('disabled', true)
+        $('#option-1').prop('disabled', true)
+        $('#option-2').prop('disabled', true)
+        $('#option-4').prop('disabled', true)
+        $(".op-1").css("color", "white");
+        $(".op-2").css("color", "white");
+        $(".op-3").css("color", "white");
+        $(".op-4").css("color", "white");
+        $(".option-1").css("cursor", "default");
+        $(".option-2").css("cursor", "default");
+        $(".option-3").css("cursor", "default");
+        $(".option-4").css("cursor", "default");
+        $(".kol").prop('disabled', true)
+        $(".kol").css("cursor", "default");
+        var number = $(".ratts").text();
+        number++;
+        $(".ratts").html(number);
+        $(".hr").val(number);
+        var frsk = $(".frsk").text();
+        $(".frsk").html(frsk - 1)
+                        
+                    
+    }
+    else{
+                    
+        $(".option-4").addClass("ratt");
+        $(".option-1").addClass("fel");
+        $(".option-2").addClass("fel");
+        $(".option-3").addClass("fel");
+        $('#option-3').prop('disabled', true)
+        $('#option-1').prop('disabled', true)
+        $('#option-2').prop('disabled', true)
+        $('#option-4').prop('disabled', true)
+        $(".op-1").css("color", "white");
+        $(".op-2").css("color", "white");
+        $(".op-3").css("color", "white");
+        $(".op-4").css("color", "white");
+        $(".option-1").css("cursor", "default");
+        $(".option-2").css("cursor", "default");
+        $(".option-3").css("cursor", "default");
+        $(".option-4").css("cursor", "default");
+        $(".kol").prop('disabled', true)
+        $(".kol").css("cursor", "default");
+        var number = $(".fela").text();
+        number++;
+        $(".fela").html(number);
+        $(".hf").val(number);
+                        
+        var frsk = $(".frsk").text();
+        $(".frsk").html(frsk - 1)
+                        
+    }
+}, error: function (ajaxContext) {
+    alert(ajaxContext.responseText)
+}
+});
+        
+});
+</script>
+   
+}
+else
+{
+    <div class="wrapper yu">
+        <h3>
+            Grattis @User.Identity.Name för att du har avslutat quizzen. Ditt resultat var @ViewBag.ratta / 5 vilket är @if (ViewBag.ratta <= 2)
+            {
+                <text>ganska dålig så träna mer :)</text>
+            }
+            else if (ViewBag.ratta <= 4)
+            {
+                <text>hyfsat bra</text>;
+            }
+            else
+            {
+                <text>Högsta poängen möjligt bra</text>
+            }
+        </h3><form asp-action="quiz" asp-controller="Home" method="get">
+        <button style="display: block !important;" class="button-17" type="submit" role="button">Starta om quizzen</button>
+        </form>
+    </div>
+}

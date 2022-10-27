@@ -1,0 +1,96 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model LoginKontroll
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="~/css/style.css" />
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=PT Sans"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=K2D" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto"
+          rel="stylesheet" />
+</head>
+<body class="login">
+
+    <header class="naven">
+        <div class="lome">
+            <a asp-action="index" asp-controller="Home">
+                <img class="sidlogga"
+                     src="~/bilder/logo.png"
+                     alt="sidlogo" />
+            </a>
+            <button id="mobil-meny"
+                    class="mobil-meny"
+                    aria-controls="navbara"
+                    aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav>
+            <ul id="prinav" data-visible="false" class="navbara">
+                <li>
+
+                    <a asp-action="Login" asp-controller="Home">
+                        <span class="navicon">
+                            <img src="~/bilder/loggain.png" />
+                        </span>
+                        Logga in
+                    </a>
+                    <div>
+                        <form style="text-decoration:none !important;" asp-action="Login" asp-controller="Home" method="get">
+                            <button class="button-17 l" role="button">Logga in</button>
+                        </form>
+                    </div>
+                </li>
+                <li>
+                    <a asp-action="registrera" asp-controller="Home">
+                        <span class="navicon">
+                            <img src="~/bilder/registrera.png" />
+                        </span>Registrera
+                    </a>
+                    <div>
+                        <form style="text-decoration:none !important;" asp-action="registrera" asp-controller="Home" method="get">
+                            <button class="button-17 l" role="button">Registrera</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="cona">
+        <div class="wra">
+            <div class="title"><span>Logga in</span></div>
+            <form class="formen" asp-action="login" asp-controller="Home" asp-route-returnurl="@ViewData["ReturnUrl"]">
+                <div class="row">
+                    @Html.EditorFor(model => model.anvnamn, new { htmlAttributes = new { placeholder = "Ditt användarnamn" } })
+                </div>
+                <div class="row">
+                    @Html.EditorFor(model => model.losen, new { htmlAttributes = new { placeholder = "Ditt lösenord" } })
+                </div>
+                <div class="row button">
+                    <input name="signin" type="submit" value="Logga in">
+                </div>
+                <p>@ViewBag.ErrorMessage</p>
+                <div class="signup-link">Är du inte medlem än? <a asp-action="registrera" asp-controller="Home">Registrera</a></div>
+            </form>
+            
+        </div>
+    </div>
+    <script src="~/js/minjava.js"></script>
+</body>
+</html>

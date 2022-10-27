@@ -1,0 +1,74 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ValdKat
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=PT Sans"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat"
+          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=K2D" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto"
+          rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body class="login">
+    <header class="naven">
+        <div class="lome">
+            <a asp-action="index" asp-controller="Home">
+                <img class="sidlogga" src="~/bilder/logo.png" alt="sidlogo" />
+            </a>
+            <button id="mobil-meny"
+                    class="mobil-meny"
+                    aria-controls="navbara"
+                    aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav>
+            <ul id="prinav" data-visible="false" class="navbara">
+                <li>
+                    <a asp-action="SignOutUser" asp-controller="Home">
+                        <span class="navicon">
+                            <img src="~/bilder/loggauticon.png" />
+                        </span>Logga Ut
+                    </a>
+                    <div>
+                        <form asp-action="SignOutUser" asp-controller="Home" ¨style="text-decoration: none !important">
+                            <button class="button-17 l" role="button">Logga Ut</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="frogor">
+    <div class=" star">
+    <form class="quizkanppen">
+            @Html.CheckBoxFor(m => m.sport) sport frågor
+            @Html.CheckBoxFor(m => m.geog) geografi frågor
+
+            <div >
+                <button class="button-68" type="submit" role="button">Starta quizzen</button>
+            </div>
+        </form>
+    </div>
+    </div>
+        
+    <script src="~/js/minjava.js"></script>
+</body>
+</html>
